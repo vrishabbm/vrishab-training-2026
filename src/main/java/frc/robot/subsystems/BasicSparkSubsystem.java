@@ -134,8 +134,8 @@ public class BasicSparkSubsystem {
         closedLoopSlot = slot;
     }
 
-    public void setBrakeMode(boolean brake) {
-        // Only change the brake mode if it is different from the current mode
+    public void setIdleMode(boolean brake) {
+        // Only change the idle mode if it is different from the current mode
         // Setting a new configuration takes cycle time on the robot, so we want to avoid doing it unnecessarily
         if(isBrakeMode != brake){
             SparkMaxConfig configuration = new SparkMaxConfig();
