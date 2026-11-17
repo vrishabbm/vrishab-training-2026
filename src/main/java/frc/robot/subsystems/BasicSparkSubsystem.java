@@ -17,11 +17,11 @@ import com.revrobotics.spark.config.SparkMaxConfig;
  * This is just to show how to create a basic subsystem with a Spark motor controller.
  */
 public class BasicSparkSubsystem {
+    // Constants, normally stored in a separate Constants class, but for this example, we will keep them here.
     private final int sparkID = 0;
     private final boolean inverted = false;
     private final int currentLimit = 60;
 
-    // In this example subsystem, we will use Slot 0 for position control and slot 1 for velocity control
     private final double slot0KP = 0.1;
     private final double slot0KI = 0.0;
     private final double slot0KD = 0.0;
@@ -35,6 +35,7 @@ public class BasicSparkSubsystem {
     private final double slot1KS = 0.1;
     private final double slot1KV = 0.1;
 
+    // Actual Motor Programming Objects
     private SparkMax motor;
     private SparkMaxConfig config;
 
@@ -48,7 +49,6 @@ public class BasicSparkSubsystem {
         
         controller = motor.getClosedLoopController();
 
-        // ---------------------------- CONFIG ---------------------------- 
         // General Configuration
         config
             .inverted(inverted)// Motor and absolute inversions are opposite
@@ -101,6 +101,7 @@ public class BasicSparkSubsystem {
             .warningsPeriodMs(1000); // Updates once a second, warnings don't need high update rate
 
         motor.clearFaults();
+        
         // Apply configuration to the motor (persist safe parameters by default)
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
