@@ -4,6 +4,7 @@ import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Celsius;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.DegreesPerSecond;
+import static edu.wpi.first.units.Units.Rotations;
 import static edu.wpi.first.units.Units.Volts;
 
 import com.revrobotics.AbsoluteEncoder;
@@ -34,7 +35,7 @@ public class ArmIOSpark implements ArmIO {
     boolean isBrakeMode = true;
 
     public ArmIOSpark() {
-        motor = new SparkMax(ArmConstants.ARM_MOTOR_ID, MotorType.kBrushless);
+        motor = new SparkMax(ArmConstants.CAN_ID, MotorType.kBrushless);
         encoder = motor.getAbsoluteEncoder();
         
         config = new SparkMaxConfig();
@@ -42,22 +43,22 @@ public class ArmIOSpark implements ArmIO {
         controller = motor.getClosedLoopController();
 
         // Configuration
-        config.inverted(ArmConstants.ARM_MOTOR_INVERTED);
+        config.inverted(ArmConstants.MOTOR_INVERTED);
         config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(ArmConstants.ARM_MOTOR_CURRENT_LIMIT);
-        config.voltageCompensation(ArmConstants.ARM_MOTOR_VOLTAGE_COMPENSATION);
+        config.smartCurrentLimit((int) ArmConstants.CURRENT_LIMIT.in(Amps));
+        config.voltageCompensation(ArmConstants.VOLTAGE_COMPENSATION.in(Volts));
 
         config.absoluteEncoder
-            .inverted(ArmConstants.ARM_ABSOLUTE_ENCODER_INVERTED)
-            .zeroOffset(ArmConstants.ARM_ABSOLUTE_ENCODER_ZERO_OFFSET)
-            .positionConversionFactor(ArmConstants.ARM_ABSOLUTE_ENCODER_POSITION_CONVERSION_FACTOR)
-            .velocityConversionFactor(ArmConstants.ARM_ABSOLUTE_ENCODER_VELOCITY_CONVERSION_FACTOR);
+            .inverted(ArmConstants.ABS_ENCODER_INVERTED)
+            .zeroOffset(ArmConstants.ABS_ENCODER_ZERO_OFFSET.in(Rotations))
+            .positionConversionFactor(ArmConstants.ABS_ENCODER_POSITION_CONVERSION_FACTOR)
+            .velocityConversionFactor(ArmConstants.ABS_ENCODER_VELOCITY_CONVERSION_FACTOR);
 
         config.closedLoop
             .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
-            .p(ArmConstants.ARM_MOTOR_KP)
-            .i(ArmConstants.ARM_MOTOR_KI)
-            .d(ArmConstants.ARM_MOTOR_KD);
+            .p(ArmConstants.KP)
+            .i(ArmConstants.KI)
+            .d(ArmConstants.KD);
         
         config.signals
             .appliedOutputPeriodMs(20) // See what voltage motor is using
