@@ -79,10 +79,6 @@ public class ArmIOSpark implements ArmIO {
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-    public AbsoluteEncoder getEncoder() {
-        return encoder;
-    }
-
     /****************************************** ARM IO IMPLEMENTED METHODS ******************************************/
     @Override
     public void updateInputs(ArmIOInputs inputs) {
