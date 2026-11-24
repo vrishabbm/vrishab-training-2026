@@ -93,13 +93,8 @@ public class ArmIOSpark implements ArmIO {
     }
 
     @Override
-    public void reset() {
-
-    }
-
-    @Override
-    public void runPercentOutput(double percentOutput) {
-        motor.set(percentOutput);
+    public void runPercentPower(double percentPower) {
+        motor.set(percentPower);
     }
 
     @Override
@@ -115,6 +110,11 @@ public class ArmIOSpark implements ArmIO {
     @Override
     public void stop() {
         motor.stopMotor();
+    }
+
+    @Override
+    public void setClosedLoopSlot(int slot) {
+        closedLoopSlot = ClosedLoopSlot.fromInt(slot);
     }
 
     @Override
@@ -140,11 +140,6 @@ public class ArmIOSpark implements ArmIO {
     }
 
     @Override
-    public void setPIDSlot(int slot) {
-        closedLoopSlot = ClosedLoopSlot.fromInt(slot);
-    }
-
-    @Override
     public void setBrakeMode(boolean brake) {
         if(isBrakeMode != brake){
             SparkMaxConfig tempConfig = new SparkMaxConfig();
@@ -154,5 +149,11 @@ public class ArmIOSpark implements ArmIO {
 
             isBrakeMode = brake;
         }
+    }
+
+    @Override
+    public void reset() {
+        stop();
+        motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 }

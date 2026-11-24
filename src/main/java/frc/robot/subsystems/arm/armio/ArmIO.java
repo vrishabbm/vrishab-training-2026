@@ -53,9 +53,7 @@ public interface ArmIO {
 
     public void updateInputs(ArmIOInputs inputs);
 
-    public void reset();
-
-    public void runPercentOutput(double percentOutput);
+    public void runPercentPower(double percentPower);
 
     public void runVoltage(Voltage voltage);
 
@@ -63,11 +61,13 @@ public interface ArmIO {
 
     public void stop();
 
+    public void setClosedLoopSlot(int slot);
+
     public void setPID(double kP, double kI, double kD, int slot);
 
     public void setKS(double kS, int slot);
 
-    public void setPIDSlot(int slot);
-
     public void setBrakeMode(boolean brake);
+
+    public void reset();
 }
