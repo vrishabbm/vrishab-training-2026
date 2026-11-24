@@ -126,7 +126,7 @@ public class ArmIOSpark implements ArmIO {
         tempConfig.closedLoop.i(kI, closedLoopSlot);
         tempConfig.closedLoop.d(kD, closedLoopSlot);
 
-        motor.configure(tempConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+        motor.configure(tempConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class ArmIOSpark implements ArmIO {
         SparkMaxConfig tempConfig = new SparkMaxConfig();
         tempConfig.closedLoop.feedForward.kS(kS, closedLoopSlot);
 
-        motor.configure(tempConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+        motor.configure(tempConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
     @Override
