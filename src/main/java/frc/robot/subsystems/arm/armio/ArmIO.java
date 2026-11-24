@@ -39,7 +39,7 @@ public interface ArmIO {
      * @param velocity the velocity of the arm
      * @param appliedVoltage the voltage applied to the arm motor
      * @param current the current draw of the arm motor
-     * @param tempCelsius the temperature of the arm motor in celsius
+     * @param temp the temperature of the arm motor
      * 
      */
     record ArmIOData(
@@ -48,7 +48,7 @@ public interface ArmIO {
         AngularVelocity velocity,
         Voltage appliedVoltage,
         Current current,
-        Temperature tempCelsius
+        Temperature temp
     ) {}
 
     public void updateInputs(ArmIOInputs inputs);
