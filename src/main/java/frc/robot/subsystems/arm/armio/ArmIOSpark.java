@@ -153,7 +153,7 @@ public class ArmIOSpark implements ArmIO {
 
     @Override
     public void reset() {
-        stop();
+        motor.clearFaults();
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 }
